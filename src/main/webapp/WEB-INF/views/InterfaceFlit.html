@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+<style type="text/css">
+  .wrapx{
+    margin: 20px auto 20px 100px;
+    width: 600px;
+    height: 500px;
+  }
+
+
+</style>
+
+<meta charset="utf-8">
+<meta name="google" value="notranslate">
+</head>
+<body>
+  <div id="ntp-contents" class="wrapx">
+
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">接口验证</h3>
+      </div>
+
+      <div class="panel-body">
+        <form>
+
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">url</span>
+            <input type="text" id="inter_url" class="form-control" placeholder="接口url" aria-describedby="basic-addon1">
+          </div>
+
+        <!--   <br>
+          <span  id="sizing-addon2">request method</span>
+          <div class="radio">
+            <label>
+              <input type="radio" name="method" value="get" checked>
+              get
+            </label>
+            &nbsp; &nbsp; &nbsp; &nbsp;
+            <label>
+              <input type="radio" name="method"  value="post">
+              post
+            </label>
+          </div>
+         -->
+
+          <br>
+          <span  id="sizing-addon2">params</span>
+          <div style="margin: 10px auto 30px 120px">
+
+            <div class="row">
+             <div class="col-xs-4">
+               <input name="param_name" type="text" class="form-control" placeholder="param1_name"> 
+             </div>
+
+             <div class="col-xs-4">
+               <input name="param_value" type="text" class="form-control" placeholder="param1_value">
+             </div>
+           </div>
+           <br>
+           <div class="row">
+             <div class="col-xs-4">
+               <input name="param_name" type="text" class="form-control" placeholder="param2_name"> 
+             </div>
+
+             <div class="col-xs-4">
+               <input name="param_value" type="text" class="form-control" placeholder="param2_value">
+             </div>
+           </div>
+
+           <br>
+           <div class="row">
+             <div class="col-xs-4">
+               <input name="param_name" type="text" class="form-control" placeholder="param3_name"> 
+             </div>
+
+             <div class="col-xs-4">
+               <input name="param_value" type="text" class="form-control" placeholder="param3_value">
+             </div>
+           </div>
+
+           <br>
+           <div class="row">
+             <div class="col-xs-4">
+               <input name="param_name" type="text" class="form-control" placeholder="param4_name"> 
+             </div>
+
+             <div class="col-xs-4">
+               <input name="param_value" type="text" class="form-control" placeholder="param4_value">
+             </div>
+           </div>
+
+           <br>
+           <div class="row">
+             <div class="col-xs-4">
+               <input name="param_name" type="text" class="form-control" placeholder="param5_name"> 
+             </div>
+
+             <div class="col-xs-4">
+               <input name="param_value" type="text" class="form-control" placeholder="param5_value">
+             </div>
+           </div>
+
+           <br>
+           <div class="row">
+             <div class="col-xs-4">
+               <input name="param_name" type="text" class="form-control" placeholder="param6_name"> 
+             </div>
+
+             <div class="col-xs-4">
+               <input name="param_value" type="text" class="form-control" placeholder="param6_value">
+             </div>
+           </div>
+
+
+           <br>
+           <div class="row" style="margin-left: 50px">
+
+            <input type="reset" class="btn btn-default" value="清空数据"> &nbsp; &nbsp; &nbsp; &nbsp;
+            <button type="button" class="btn btn-success" id="go_submit">请求接口</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+    
+
+  </div>
+
+</div>
+<div id="result"></div>
+
+</div>
+</body>
+<script src="js/jquery-2.2.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script language="javascript">
+  $(function(){
+    $('#go_submit').on('click', function(){
+
+      var url = $("#inter_url").val();
+
+      
+      if (url == undefined ) {
+        return 0;
+      }
+
+
+      var params ="";
+      $('input[name="param_name"]').each(function(){
+        var pname = $(this).val();
+        if (pname.trim() != "") {
+          var pvalue = $(this).parent().parent().siblings('#param_value').val();
+
+          var param = '&'+pname +'='+pvalue;
+          params = params + param;
+        }
+
+      });
+
+      console.log(url + params);  
+      
+
+      $("<iframe id='result_frame' style='margin: 100px auto auto 50px; width: 1200px; height: 800px' frameborder='no' marginheight='0' marginwidth='0' allowTransparency='true' ></iframe>").prependTo('#result'); 
+      $("#result_frame").attr("src", url+params)
+      // $('#result_frame').src = url+params;
+
+     /* $.ajax({   
+        url: url + params,   
+        type:'post',   
+
+        error:function(){   
+          alert('error');   
+        },   
+        success:function(data){   
+         $("#result").html(data); 
+         //console.log(data);  
+       }
+     });
+     */
+   })
+
+  })
+
+</script>
+</html>
